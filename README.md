@@ -20,3 +20,5 @@ It is not aimed to be user friendly, it's meant to be stable and efficient, both
 
 - **Portable design** - The system should be as portable and abstract as possible to prevent unused features
   - Example: Trackpad gestures will not be used at a desktop. Thus no trackpad features
+
+- **Visual cohesion** - Apps should have consistent design and feel homogeneous
