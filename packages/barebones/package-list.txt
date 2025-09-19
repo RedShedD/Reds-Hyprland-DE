@@ -1,0 +1,18 @@
+# Basic:
+Kitty
+Hyprland 
+Bluetoothctl
+Pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+ttf-dejavu
+noto-Fonts
+Vim
+Yazi
+Wl-Clipboard
+wofi
+grim
+slurp
+swappy
+Swaybg
