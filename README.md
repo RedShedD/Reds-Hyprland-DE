@@ -11,6 +11,7 @@ A custom Hyprland-based keyboard driven desktop environment for Arch Linux, insp
 
 - **Minimal dependencies** - Mostly independent packages with as little dependencies as possible to prevent breakage on update.
   - Example: No filemanagers with dependencies from other DEs
+  
 - **Single-purpose packages** - Each package should serve the thing it's used for, and nothing else.
   - Example: An app launcher just launches apps. It should NOT act as an emoji or tab selector.
 

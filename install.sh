@@ -1,7 +1,5 @@
 #!/bin/bash
-
 # Reds-Hyprland-DE Installation Script
-# Usage: ./install.sh [bare-bones|apps|widgets|full]
 
 set -e
 
@@ -110,8 +108,10 @@ deploy_configs() {
     fi
     
     info "Creating Pictures directories..."
+
     mkdir -p "$HOME/Pictures/screenshots"
     mkdir -p "$HOME/Pictures/wallpapers"
+    
     log "Screenshots folder created: ~/Pictures/screenshots"
     log "Wallpapers folder created: ~/Pictures/wallpapers"
     
@@ -124,18 +124,7 @@ deploy_configs() {
                 cp "$wallpaper" "$HOME/Pictures/wallpapers/"
                 log "Copied: $(basename "$wallpaper")"
             fi
-        done
-        
-        # Set default wallpaper for Hyprland config
-        # TODO set the wallpaper for swaybg
-        default_wallpaper=$(find "${wallpaper_source}" -name "*.jpg" -o -name "*.png" | head -1)
-        if [[ -n "$default_wallpaper" ]]; then
-            mkdir -p "$HOME/.config/hyprland"
-            cp "$default_wallpaper" "$HOME/.config/hyprland/wallpaper$(echo "$default_wallpaper" | sed 's/.*\(\.[^.]*\)$/\1/')"
-            log "Default wallpaper set for Hyprland"
-        fi
-    else
-        warn "Wallpaper directory not found: $wallpaper_source"
+        done        
     fi
     
     # Copy scripts to .local/bin
@@ -150,13 +139,7 @@ deploy_configs() {
                 chmod +x "$HOME/.local/bin/$script_name"
                 log "Installed script: $script_name"
             fi
-        done
-        
-        # Add ~/.local/bin to PATH if not already there
-        if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-            echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-            log "Added ~/.local/bin to PATH in .bashrc"
-        fi
+        done        
     else
         warn "Scripts directory not found: ${SCRIPT_DIR}/scripts"
     fi
@@ -169,7 +152,6 @@ deploy_configs() {
 enable_services() {
     info "Enabling system services..."
     
-    # Enable Bluetooth if installed
     if pacman -Qq bluez-utils &>/dev/null; then
         sudo systemctl enable bluetooth.service
         log "Bluetooth service enabled"
@@ -177,26 +159,18 @@ enable_services() {
 }
 
 show_post_install() {
-    echo ""
-    echo "=================================================================="
-    log "Installation completed!"
-    echo "=================================================================="
-    echo ""
-    log "Next steps:"
-    echo "  1. Reboot: sudo reboot"    
-    echo "  2. Launch Hyprland"
-    echo ""
     
+
     if [[ "$INSTALL_TYPE" == "bare-bones" ]]; then
         log "You installed 'bare-bones' only. For more apps:"
         echo "  ./install.sh apps     # Add GUI apps"
         echo "  ./install.sh widgets  # Add widgets"
         echo "  ./install.sh full     # Install everything"
     fi
-    
+
+    log "Please reboot to complete the installation."    
     echo ""
-    log "Scripts installed to ~/.local/bin"
-    log "For issues: see docs/troubleshooting.md"
+    log "Scripts installed to ~/.local/bin"   
 }
 
 main() {
@@ -215,13 +189,10 @@ main() {
         "bare-bones")
             install_packages_from_list "bare-bones"
             ;;
-        "apps")
-            install_packages_from_list "bare-bones"
+        "apps")            
             install_packages_from_list "apps"
             ;;
-        "widgets")
-            install_packages_from_list "bare-bones"
-            install_packages_from_list "apps"
+        "widgets")            
             install_packages_from_list "widgets"
             ;;
         "full")
@@ -247,22 +218,22 @@ if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
     echo ""
     echo "Installation Types:"
     echo "  bare-bones - Minimal working system"
-    echo "             - Hyprland, Terminal Emulator, Vim, File Manager, Audio, Fonts"
+    echo "             - Hyprland, Terminal Emulator, Vim, File Manager, Audio, Fonts, Bluetooth"
     echo ""
-    echo "  apps       - Bare-bones + important GUI applications"  
-    echo "             - Firefox, Thunar, Image viewer, Text editor"
+    echo "  apps       - important GUI applications"  
+    echo "             - Firefox, GIMP"
     echo ""
-    echo "  widgets    - Bare-bones + Apps + additional tools"
+    echo "  widgets    - additional tools"
     echo "             - Cava, Fastfetch"
     echo ""
     echo "  full       - Complete installation (bare-bones + apps + widgets)"
     echo ""
-    echo "Step-by-step installation:"
+    echo "Install individual components:"
     echo "  ./install.sh bare-bones    # First install bare-bones system"
     echo "  ./install.sh apps          # Then add GUI apps"
     echo "  ./install.sh widgets       # Then add extra tools"
     echo ""
-    echo "Direct installation:"
+    echo "Full installation:"
     echo "  ./install.sh full      # Everything at once"
     exit 0
 fi

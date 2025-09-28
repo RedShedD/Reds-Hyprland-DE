@@ -1,12 +1,12 @@
 kitty
-Hyprland 
-pluetoothctl
+hyprland 
+bluez-utils
 pipewire
 pipewire-pulse
 pipewire-alsa
 wireplumber
 ttf-dejavu
-noto-Fonts
+noto-fonts
 vim
 yazi
 wl-clipboard
@@ -14,5 +14,5 @@ wofi
 grim
 slurp
 swappy
-Swaybg
+swaybg
 playerctl
