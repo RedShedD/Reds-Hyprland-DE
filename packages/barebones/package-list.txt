@@ -1,18 +1,18 @@
-# Basic:
-Kitty
+kitty
 Hyprland 
-Bluetoothctl
-Pipewire
+pluetoothctl
+pipewire
 pipewire-pulse
 pipewire-alsa
 wireplumber
 ttf-dejavu
 noto-Fonts
-Vim
-Yazi
-Wl-Clipboard
+vim
+yazi
+wl-clipboard
 wofi
 grim
 slurp
 swappy
 Swaybg
+playerctl

@@ -1,0 +1,20 @@
+/* Created by user */
+
+#entry:selected {
+background-color: #00B3FE;
+color: white;
+}
+
+#window{
+border-radius:10px;
+background-color:white;
+}
+
+#input{
+border: 2px solid #00B3FE;	
+border-radius: 10px 10px 0 0;
+}
+
+#input:focus{
+border-color:#00B3FE
+}

@@ -1,0 +1,20 @@
+# yazi.toml
+
+[mgr]
+ratio = [0,4,3]
+cwd = {fg = "red"}
+
+
+
+[opener]
+edit =  [{run = 'vim "$@"', block = true, desc = "Edit with vim" }]
+image = [{run = 'gimp "$@"', desc = "Edit with GIMP"}]
+
+
+[open]
+rules = [
+{mime = "image/*", use = "image"},
+{mime = "text/*", use = "edit"},
+{name = "*", use = "edit"}
+]
+
