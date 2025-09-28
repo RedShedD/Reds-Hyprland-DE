@@ -1,5 +1,6 @@
 kitty
 hyprland 
+bluez
 bluez-utils
 pipewire
 pipewire-pulse

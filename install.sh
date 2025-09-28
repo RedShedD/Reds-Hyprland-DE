@@ -133,7 +133,7 @@ deploy_configs() {
     
     if [[ -d "${SCRIPT_DIR}/scripts" ]]; then
         for script in "${SCRIPT_DIR}/scripts"/*; do
-            if [[ -f "$script"]]; then
+            if [[ -f "$script" ]]; then
                 script_name=$(basename "$script")
                 cp "$script" "$HOME/.local/bin/"
                 chmod +x "$HOME/.local/bin/$script_name"
