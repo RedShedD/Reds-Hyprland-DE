@@ -11,13 +11,13 @@ A custom Hyprland-based keyboard driven desktop environment for Arch Linux, insp
 
 - **Minimal dependencies** - Mostly independent packages with as little dependencies as possible to prevent breakage on update.
   - Example: No filemanagers with dependencies from other DEs
-  
+
 - **Single-purpose packages** - Each package should serve the thing it's used for, and nothing else.
   - Example: An app launcher just launches apps. It should NOT act as an emoji or tab selector.
 
 - **Visual cohesion** - Everything should have consistent design and feel homogeneous
 
 
-It is advised to copy this repo onto a portable drive, mount it and call the install.sh script from there, to prevent the need of isntalling git to clone the repository - keeps the system cleaner.
+It is advised to copy this repo onto a portable drive, mount it and call the install.sh script from there, to prevent the need of installing git to clone the repository - keeps the system cleaner.
 
 Don't forget to check out shortcuts.md
