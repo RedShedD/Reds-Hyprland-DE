@@ -48,7 +48,6 @@ check_dependencies() {
         error "Do not run this script as root!"
     fi
     
-    # Check if sudo works
     if ! sudo -n true 2>/dev/null; then
         log "Sudo privileges required..."
         sudo true
@@ -66,7 +65,6 @@ install_packages_from_list() {
     
     info "Installing ${category} packages..."
     
-    # Read packages from list (ignore comments and empty lines)
     local packages=$(grep -v '^#' "$pkg_file" | grep -v '^$' | sed 's/[[:space:]]*$//' | tr '\n' ' ')
     
     if [[ -z "$packages" ]]; then
@@ -76,7 +74,6 @@ install_packages_from_list() {
     
     log "Packages: $packages"
     
-    # Install directly from repos
     sudo pacman -S --needed --noconfirm $packages
     
     log "${category} packages installed successfully"
@@ -85,21 +82,17 @@ install_packages_from_list() {
 deploy_configs() {
     info "Copying configuration files..."
     
-    # Create .config if it doesn't exist
     mkdir -p "$HOME/.config"
     
-    # Create backup if configs exist
     backup_dir="$HOME/.config-backup-$(date +%Y%m%d-%H%M%S)"
     backup_created=false
     
-    # Copy configs
     if [[ -d "${SCRIPT_DIR}/configs" ]]; then
         for config_dir in "${SCRIPT_DIR}/configs"/*; do
             if [[ -d "$config_dir" ]]; then
                 config_name=$(basename "$config_dir")
                 target_dir="$HOME/.config/$config_name"
                 
-                # Backup only if target directory exists
                 if [[ -d "$target_dir" ]]; then
                     if [[ "$backup_created" == false ]]; then
                         mkdir -p "$backup_dir"
@@ -116,19 +109,16 @@ deploy_configs() {
         done
     fi
     
-    # Create Pictures directories
     info "Creating Pictures directories..."
     mkdir -p "$HOME/Pictures/screenshots"
     mkdir -p "$HOME/Pictures/wallpapers"
     log "Screenshots folder created: ~/Pictures/screenshots"
     log "Wallpapers folder created: ~/Pictures/wallpapers"
     
-    # Copy wallpapers if available
     wallpaper_source="${SCRIPT_DIR}/themes/main-theme/wallpapers"
     if [[ -d "$wallpaper_source" ]]; then
         log "Copying wallpapers..."
         
-        # Copy all wallpapers to ~/Pictures/wallpapers
         for wallpaper in "${wallpaper_source}"/*; do
             if [[ -f "$wallpaper" ]]; then
                 cp "$wallpaper" "$HOME/Pictures/wallpapers/"
@@ -137,6 +127,7 @@ deploy_configs() {
         done
         
         # Set default wallpaper for Hyprland config
+        # TODO set the wallpaper for swaybg
         default_wallpaper=$(find "${wallpaper_source}" -name "*.jpg" -o -name "*.png" | head -1)
         if [[ -n "$default_wallpaper" ]]; then
             mkdir -p "$HOME/.config/hyprland"
@@ -192,27 +183,19 @@ show_post_install() {
     echo "=================================================================="
     echo ""
     log "Next steps:"
-    echo "  1. Reboot: sudo reboot"
-    echo "  2. Select 'Hyprland' in your display manager"
-    echo "  3. Or start directly: Hyprland"
-    echo ""
-    
-    log "Important keybindings:"
-    echo "  Super + Return       Open terminal"
-    echo "  Super + R           App launcher"
-    echo "  Super + Q           Close window"
-    echo "  Super + E           File manager"
+    echo "  1. Reboot: sudo reboot"    
+    echo "  2. Launch Hyprland"
     echo ""
     
     if [[ "$INSTALL_TYPE" == "bare-bones" ]]; then
         log "You installed 'bare-bones' only. For more apps:"
         echo "  ./install.sh apps     # Add GUI apps"
-        echo "  ./install.sh widgets  # Add extra tools"
+        echo "  ./install.sh widgets  # Add widgets"
         echo "  ./install.sh full     # Install everything"
     fi
     
     echo ""
-    log "Scripts installed to ~/.local/bin (restart terminal to use)"
+    log "Scripts installed to ~/.local/bin"
     log "For issues: see docs/troubleshooting.md"
 }
 
