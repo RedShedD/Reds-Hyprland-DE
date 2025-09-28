@@ -133,7 +133,7 @@ deploy_configs() {
     
     if [[ -d "${SCRIPT_DIR}/scripts" ]]; then
         for script in "${SCRIPT_DIR}/scripts"/*; do
-            if [[ -f "$script" && -x "$script" ]]; then
+            if [[ -f "$script"]]; then
                 script_name=$(basename "$script")
                 cp "$script" "$HOME/.local/bin/"
                 chmod +x "$HOME/.local/bin/$script_name"
@@ -167,10 +167,10 @@ show_post_install() {
         echo "  ./install.sh widgets  # Add widgets"
         echo "  ./install.sh full     # Install everything"
     fi
-
-    log "Please reboot to complete the installation."    
     echo ""
-    log "Scripts installed to ~/.local/bin"   
+    log "Scripts installed to ~/.local/bin"  
+    log "Please reboot to complete the installation."    
+     
 }
 
 main() {
@@ -218,13 +218,13 @@ if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
     echo ""
     echo "Installation Types:"
     echo "  bare-bones - Minimal working system"
-    echo "             - Hyprland, Terminal Emulator, Vim, File Manager, Audio, Fonts, Bluetooth"
+    echo "             - Examples: Hyprland, Terminal Emulator, Vim, File Manager, Audio, Fonts, Bluetooth"
     echo ""
     echo "  apps       - important GUI applications"  
-    echo "             - Firefox, GIMP"
+    echo "             - Examples: Firefox, GIMP"
     echo ""
     echo "  widgets    - additional tools"
-    echo "             - Cava, Fastfetch"
+    echo "             - Examples: Cava, Fastfetch"
     echo ""
     echo "  full       - Complete installation (bare-bones + apps + widgets)"
     echo ""
