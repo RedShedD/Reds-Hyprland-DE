@@ -20,6 +20,8 @@ SUPER + P: Resize window in respect to constraint
 CTRL + C: Copy to clipboard
 CTRL + V: Paste from clipboard
 
+SUPER + B: Toggle status bar
+
 PrintScrn: Take Screenshot
 
 Mouse-Select: Copy to PRIMARY
