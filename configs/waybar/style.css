@@ -1,0 +1,50 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: rgba(89, 89, 89, 0.67);
+}
+
+#clock,
+#cpu,
+#memory {
+    background-color: transparent;
+    color: #ffffff;
+    padding: 0 10px;
+}
+
+
+#workspaces button {
+    padding: 0 10px;
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    margin: 0 2px;
+    transition: border-color 0.23s ease;
+    
+}
+
+#workspaces button.active {
+    border-color: #00B3FE;
+}
+
+
+#workspaces button:hover {
+    /*resetting gtk styles*/
+    background: none;
+    text-shadow: none;
+    transition: none;
+    box-shadow: none;
+
+    font-weight: bold;
+    border-top: 2px solid #00B3FE; 
+}
+
+
